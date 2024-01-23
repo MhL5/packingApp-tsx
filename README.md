@@ -1,7 +1,7 @@
 # React + TypeScript + Vite
 
-## Packing List app Typescript + React
+## Jonas Schmedtmann Far Away application Copy
 
-### simple example of how to use React + typescript
+This is Jonas Schmedtmann Far Away application copy implemented using typescript
 
 ![application photo](./public/app-screenshot.png)
