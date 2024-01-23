@@ -1,0 +1,25 @@
+.item {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: baseline;
+  min-width: 20rem;
+  padding: 1rem;
+
+  input {
+    width: 1.5rem;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+  }
+
+  button {
+    padding: 0.1rem 0.3rem;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  p {
+    margin: 1rem;
+  }
+}

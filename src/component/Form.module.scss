@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  margin: 3rem;
+
+  $child-paddings: 1rem 2rem;
+  button {
+    padding: $child-paddings;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+      color: rgb(206, 206, 206);
+    }
+  }
+
+  input {
+    padding: $child-paddings;
+  }
+
+  select {
+    padding: $child-paddings;
+  }
+}

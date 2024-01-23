@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 60vh;
+  width: 100%;
+
+  .items {
+    align-self: flex-start;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: auto;
+    margin: auto;
+    place-items: center;
+  }
+
+  .btnContainer {
+    margin-top: auto;
+
+    select {
+      margin: 1rem;
+      padding: 0.7rem 2rem;
+    }
+
+    button {
+      margin: 1rem;
+      padding: 0.7rem 2rem;
+    }
+  }
+}
