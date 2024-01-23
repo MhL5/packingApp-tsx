@@ -1,11 +1,15 @@
 import { useState, type FC } from "react";
+
 import styles from "./PackingList.module.scss";
-import { usePackingListContext } from "../context/PackingListContext";
 import Item from "./Item";
+
+import { usePackingListContext } from "../context/PackingListContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const PackingList: FC = function () {
   const [selectValue, setSelectValue] = useState("InputOrder");
-  const { packingList } = usePackingListContext();
+  const { packingList, setPackingList } = usePackingListContext();
+  const [,setPackingListLocalStorage] = useLocalStorage({ key: "packingList" });
 
   let sortedItems;
   if (selectValue === "InputOrder") sortedItems = packingList;
@@ -18,6 +22,11 @@ const PackingList: FC = function () {
     sortedItems = packingList
       ?.slice()
       .sort((a, b) => a.content.localeCompare(b.content));
+  }
+
+  function handleClear() {
+    setPackingList([]);
+    setPackingListLocalStorage([]);
   }
 
   return (
@@ -36,7 +45,7 @@ const PackingList: FC = function () {
           <option value="packedStatus">Sort by Packed Status</option>
           <option value="description">Sort by Packed Description</option>
         </select>
-        <button>Clear</button>
+        <button onClick={handleClear}>Clear</button>
       </div>
     </main>
   );

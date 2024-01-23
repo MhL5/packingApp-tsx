@@ -20,7 +20,7 @@ function useLocalStorage({
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  return { value, updateValue };
+  return [value, updateValue];
 }
 
 export { useLocalStorage };

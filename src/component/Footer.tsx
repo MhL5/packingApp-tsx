@@ -9,6 +9,7 @@ const Footer: FC = function () {
     (packed, pl) => (pl.done === true ? (packed += 1) : packed),
     0
   );
+  
   const packedPercentage = packed
     ? Math.floor((packed / packingList!.length) * 100)
     : 0;

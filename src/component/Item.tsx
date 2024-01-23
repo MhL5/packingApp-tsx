@@ -1,5 +1,7 @@
-import { useEffect, type FC } from "react";
+import { type FC } from "react";
+
 import styles from "./Item.module.scss";
+
 import { usePackingListContext } from "../context/PackingListContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -10,39 +12,35 @@ const Item: FC<{
   quantity: number;
 }> = function ({ content, id, done, quantity }) {
   const { packingList, setPackingList } = usePackingListContext();
-  const { updateValue } = useLocalStorage({ key: "packingList" });
+  const [, setPackingListLocalStorage] = useLocalStorage({
+    key: "packingList",
+  });
 
   function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
-    setPackingList((pl) => {
-      const res = pl!.filter((item) => item.id !== id);
-      return res;
-    });
+    setPackingList((pl) => pl!.filter((item) => item.id !== id));
   }
 
   function handleDone() {
-    setPackingList((pls) => {
-      if (pls !== undefined) {
-        return pls!.map((pl) => {
-          if (pl.id === id)
-            return {
-              content: pl.content,
-              done: !pl.done,
-              id: pl.id,
-              quantity: pl.quantity,
-            };
-          else return pl;
-        });
-      }
+    setPackingList((pls) =>
+      pls.map((pl) => {
+        if (pl.id === id) {
+          const updatedPl = {
+            content: pl.content,
+            done: !pl.done,
+            id: pl.id,
+            quantity: pl.quantity,
+          };
 
-      return null;
-    });
+          return updatedPl;
+        }
+
+        return pl;
+      })
+    );
+    setPackingListLocalStorage(packingList);
   }
-
-  useEffect(() => {
-    updateValue(packingList);
-  }, [packingList, updateValue]);
 
   return (
     <div className={`${styles.item} ${id}`}>

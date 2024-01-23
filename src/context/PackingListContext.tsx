@@ -1,29 +1,29 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-type PackingListState = {
-  content: string;
-  done: boolean;
-  id: number;
-  quantity: number;
-}[];
+type PackingListState =
+  | {
+      content: string;
+      done: boolean;
+      id: number;
+      quantity: number;
+    }[]
+  | [];
 
 type PackingListContextType = {
-  packingList: PackingListState | null;
-  setPackingList: React.Dispatch<React.SetStateAction<PackingListState | null>>;
+  packingList: PackingListState;
+  setPackingList: React.Dispatch<React.SetStateAction<PackingListState>>;
 };
 
 const PackingListContext = createContext<PackingListContextType | null>(null);
 
 function PackingListProvider({ children }: { children: ReactNode }) {
-  const { value } = useLocalStorage({ key: "packingList" });
+  const [packingListLocalStorage] = useLocalStorage({ key: "packingList" });
 
-  const [packingList, setPackingList] = useState<PackingListState | null>(
-    () => {
-      if (value) return value;
-      else return [];
-    }
-  );
+  const [packingList, setPackingList] = useState<PackingListState>(() => {
+    if (packingListLocalStorage) return packingListLocalStorage;
+    else return [];
+  });
 
   const ctx = {
     packingList,

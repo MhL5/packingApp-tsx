@@ -1,5 +1,7 @@
-import { FC, FormEvent, useEffect, useState } from "react";
+import { type FC, type FormEvent, useState } from "react";
+
 import styles from "./Form.module.scss";
+
 import { usePackingListContext } from "../context/PackingListContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -7,40 +9,24 @@ const Form: FC = function () {
   const [inputText, setInputText] = useState("");
   const [select, setSelect] = useState(1);
   const { packingList, setPackingList } = usePackingListContext();
-  const { updateValue } = useLocalStorage({ key: "packingList" });
-
-  useEffect(() => {
-    updateValue(packingList);
-  }, [packingList, updateValue]);
+  const [, setPackingListLocalStorage] = useLocalStorage({
+    key: "packingList",
+  });
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
 
-    setPackingList((pl) => {
-      let result;
-      if (pl === null || pl.length === 0)
-        result = [
-          {
-            content: inputText,
-            done: false,
-            id: Math.random(),
-            quantity: select,
-          },
-        ];
+    const newPl = {
+      content: inputText,
+      done: false,
+      id: Math.random(),
+      quantity: select,
+    };
 
-      if (pl?.length)
-        result = [
-          ...pl,
-          {
-            content: inputText,
-            done: false,
-            id: Math.random(),
-            quantity: select,
-          },
-        ];
-
-      return result || null;
-    });
+    // update state
+    setPackingList((pl) => [...pl, newPl]);
+    // update localStorage
+    setPackingListLocalStorage(packingList);
   }
 
   return (
