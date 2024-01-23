@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-function useLocalStorage({
-  key,
-  initialValue,
-}: {
+type UseLocalStorageOptions = {
   key: string;
   initialValue?: unknown;
-}) {
+};
+
+type UseLocalStorage = (
+  options: UseLocalStorageOptions
+) => [unknown, (value: unknown) => void];
+
+const useLocalStorage: UseLocalStorage = function ({ key, initialValue }) {
   // get the storedValue in localStorage OR store the initialValue in localStorage
   const storedValue = localStorage.getItem(key);
   const initial = storedValue ? JSON.parse(storedValue) : initialValue;
@@ -21,6 +24,6 @@ function useLocalStorage({
   }
 
   return [value, updateValue];
-}
+};
 
 export { useLocalStorage };

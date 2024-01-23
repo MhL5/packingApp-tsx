@@ -1,4 +1,7 @@
 # React + TypeScript + Vite
 
-this is a very simple application
-a very good example of how to use react + typescript
+## Packing List app Typescript + React
+
+### simple example of how to use React + typescript
+
+![application photo](./public/app-screenshot.png)

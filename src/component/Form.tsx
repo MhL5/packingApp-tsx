@@ -7,7 +7,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const Form: FC = function () {
   const [inputText, setInputText] = useState("");
-  const [select, setSelect] = useState(1);
+  const [select, setSelect] = useState(0);
   const { packingList, setPackingList } = usePackingListContext();
   const [, setPackingListLocalStorage] = useLocalStorage({
     key: "packingList",
@@ -34,9 +34,9 @@ const Form: FC = function () {
       <p>What do you need for your trip?🙄</p>
 
       <select value={select} onChange={(e) => setSelect(+e.target.value)}>
-        {Array.from({ length: 20 }, (_, index) => (
-          <option key={`${index + 1}`} value={index + 1}>
-            {index + 1}
+        {Array.from({ length: 21 }, (_, index) => (
+          <option key={`${index}`} value={index}>
+            {index}
           </option>
         ))}
       </select>

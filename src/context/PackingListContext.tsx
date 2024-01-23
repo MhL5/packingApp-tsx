@@ -18,10 +18,13 @@ type PackingListContextType = {
 const PackingListContext = createContext<PackingListContextType | null>(null);
 
 function PackingListProvider({ children }: { children: ReactNode }) {
-  const [packingListLocalStorage] = useLocalStorage({ key: "packingList" });
+  const [packingListLocalStorage] = useLocalStorage({
+    key: "packingList",
+  });
 
   const [packingList, setPackingList] = useState<PackingListState>(() => {
-    if (packingListLocalStorage) return packingListLocalStorage;
+    if (packingListLocalStorage)
+      return packingListLocalStorage as PackingListState;
     else return [];
   });
 

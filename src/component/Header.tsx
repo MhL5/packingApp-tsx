@@ -7,7 +7,7 @@ type HeaderProps = PropsWithChildren<{
 const Header: FC<HeaderProps> = function ({ children, as }) {
   const Heading = as;
 
-  return <Heading>{children}</Heading>;
+  return <Heading style={{ marginBlock: `3rem` }}>{children}</Heading>;
 };
 
 export default Header;

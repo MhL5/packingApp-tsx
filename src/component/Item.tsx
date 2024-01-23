@@ -46,7 +46,7 @@ const Item: FC<{
     <div className={`${styles.item} ${id}`}>
       <input type="checkbox" checked={done} onChange={handleDone} />
       <p style={{ textDecoration: `${done ? `line-through` : "none"}` }}>
-        {`${quantity} ${content}`}
+        {`${quantity > 0 ? quantity : ""} ${content}`}
       </p>
       <button onClick={handleDelete}>❌</button>
     </div>
